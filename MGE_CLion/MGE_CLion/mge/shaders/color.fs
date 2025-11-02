@@ -8,9 +8,10 @@
 //DIFFUSE COLOR FRAGMENT SHADER
 #version 400
 
-uniform float ambientIntensity;
-uniform vec3 ambientLightColor;
-uniform vec3 diffuseColor;
+uniform float ambientIntensity = 1.0;
+uniform vec3 ambientLightColor = vec3(1,1,1);
+uniform vec3 diffuseColor = vec3(1,1,1);
+uniform bool lightInScene = false;
 
 in vec3 lightDirection;
 in float lightDistance;
@@ -45,8 +46,20 @@ void main( void ) {
         specular *= attenuation;
     }
 
-// 	fragment_color = vec4(ambient, 1);
-// 	fragment_color = vec4(diffuse, 1);
-// 	fragment_color = vec4(specular, 1);
-	fragment_color = vec4(ambient + diffuse + specular, 1);
+    // Use the default values of ambient if there is no light in the scene!
+    if (lightInScene)
+    {
+    // For testing we keep every possible lighting combination here for quick switching!
+    // 	fragment_color = vec4(ambient, 1);
+    // 	fragment_color = vec4(diffuse, 1);
+    // 	fragment_color = vec4(specular, 1);
+    // 	fragment_color = vec4(ambient + diffuse, 1);
+    // 	fragment_color = vec4(ambient + specular, 1);
+    // 	fragment_color = vec4(diffuse + specular, 1);
+        fragment_color = vec4(ambient + diffuse + specular, 1);
+    }
+    else
+    {
+	    fragment_color = vec4(ambient, 1);
+    }
 }

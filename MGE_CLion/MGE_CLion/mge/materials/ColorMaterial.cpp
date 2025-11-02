@@ -19,6 +19,7 @@ GLint ColorMaterial::_uSpecularColor = 0;
 GLint ColorMaterial::_uConstantAttenuation = 0;
 GLint ColorMaterial::_uLinearAttenuation = 0;
 GLint ColorMaterial::_uQuadraticAttenuation = 0;
+GLint ColorMaterial::_uLightingInScene = 0;
 
 ColorMaterial::ColorMaterial(glm::vec3 pDiffuseColor):_diffuseColor (pDiffuseColor)
 {
@@ -45,6 +46,7 @@ void ColorMaterial::_lazyInitializeShader() {
         _uConstantAttenuation = _shader->getUniformLocation("constantAttenuation");
         _uLinearAttenuation = _shader->getUniformLocation("linearAttenuation");
         _uQuadraticAttenuation = _shader->getUniformLocation("quadraticAttenuation");
+        _uLightingInScene = _shader->getUniformLocation("lightingInScene");
     }
 }
 
@@ -96,4 +98,5 @@ void ColorMaterial::setLighting(Lighting pLighting, glm::vec3 lightPosition, glm
     glUniform1f(_uConstantAttenuation, pLighting.constantAttenuation);
     glUniform1f(_uLinearAttenuation, pLighting.linearAttenuation);
     glUniform1f(_uQuadraticAttenuation, pLighting.quadraticAttenuation);
+    glUniform1f(_uLightingInScene, true);
 }

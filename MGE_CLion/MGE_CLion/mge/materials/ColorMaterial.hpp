@@ -39,6 +39,7 @@ class ColorMaterial : public AbstractMaterial
         static GLint _uConstantAttenuation;
         static GLint _uLinearAttenuation;
         static GLint _uQuadraticAttenuation;
+        static GLint _uLightingInScene;
         static void _lazyInitializeShader();
 
         //this one is unique per instance of color material

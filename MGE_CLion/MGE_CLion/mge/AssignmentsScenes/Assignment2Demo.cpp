@@ -49,8 +49,7 @@ void Assignment2Demo::_initializeScene()
     Mesh* sphereMeshS = Mesh::load (config::MGE_MODEL_PATH+"sphere_smooth.obj");
     Mesh* teapotF = Mesh::load (config::MGE_MODEL_PATH+"teapot_flat.obj");
     Mesh* suzannaS = Mesh::load (config::MGE_MODEL_PATH+"suzanna_smooth.obj");
-//    Mesh* bonnieMesh = Mesh::load (config::MGE_MODEL_PATH+"Bonnie.obj");
-//    Mesh* guitarMesh = Mesh::load (config::MGE_MODEL_PATH+"Guitar.obj");
+    Mesh* marioMesh = Mesh::load (config::MGE_MODEL_PATH+"Mario.obj");
 
     //MATERIALS
 
@@ -60,6 +59,7 @@ void Assignment2Demo::_initializeScene()
     AbstractMaterial* bricksMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"bricks.jpg"));
     AbstractMaterial* redMaterial = new ColorMaterial (glm::vec3(1,0,0));
     AbstractMaterial* blueMaterial = new ColorMaterial (glm::vec3(0,0,1));
+    AbstractMaterial* greenMaterial = new ColorMaterial (glm::vec3(0,1,0));
     AbstractMaterial* landMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"land.jpg"));
 
     //SCENE SETUP
@@ -89,25 +89,32 @@ void Assignment2Demo::_initializeScene()
     floor->scale(glm::vec3(5,5,5));
     floor->setMesh(planeMeshDefault);
     floor->setMaterial(landMaterial);
+    floor->setBehaviour(new MovementBehaviour(1));
     _world->add(floor);
 
-    GameObject* teapot = new GameObject ("teapot", glm::vec3(1,0.25,0));
+    GameObject* teapot = new GameObject ("teapot", glm::vec3(0.75,0.25,0));
     teapot->scale(glm::vec3(0.25,0.25,0.25));
     teapot->setMesh(teapotF);
     teapot->setMaterial(blueMaterial);
     floor->add(teapot);
 
-    GameObject* suzanna = new GameObject ("suzanna", glm::vec3(0,0.25,0));
+    GameObject* suzanna = new GameObject ("Suzanna", glm::vec3(0,0.25,0));
     suzanna->scale(glm::vec3(0.25,0.25,0.25));
     suzanna->setMesh(suzannaS);
     suzanna->setMaterial(redMaterial);
-    suzanna->setBehaviour(new MovementBehaviour(25));
+//    suzanna->setBehaviour(new MovementBehaviour(1));
     floor->add(suzanna);
+
+    GameObject* mario = new GameObject ("Mario", glm::vec3(-0.75,0,0));
+    mario->scale(glm::vec3(0.15,0.15,0.15));
+    mario->setMesh(marioMesh);
+    mario->setMaterial(greenMaterial);
+    floor->add(mario);
 
     // Get the camera orbit behaviour
     AbstractBehaviour* behaviour = camera->getBehaviour();
     CameraOrbitBehaviour* orbit = dynamic_cast<CameraOrbitBehaviour*>(behaviour);
-    orbit->setObj(sphere);
+    orbit->setObj(floor);
     orbit->setDistance(10);
     orbit->rotate();
 

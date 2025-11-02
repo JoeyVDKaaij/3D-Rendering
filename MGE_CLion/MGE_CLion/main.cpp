@@ -26,9 +26,9 @@ int main()
     std::cout << "Starting Game" << std::endl;
 
 //    AbstractGame* game = new MGEDemo();
-//    AbstractGame* game = new Assignment2Demo();
+    AbstractGame* game = new Assignment2Demo();
 //    AbstractGame* game = new Assignment3Demo();
-    AbstractGame* game = new Assignment4Demo();
+//    AbstractGame* game = new Assignment4Demo();
     game->initialize();
     game->run();
 
