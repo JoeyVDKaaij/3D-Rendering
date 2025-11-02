@@ -123,7 +123,7 @@ void Assignment2Demo::_initializeScene()
     // Get the camera orbit behaviour
     AbstractBehaviour* behaviour = camera->getBehaviour();
     CameraOrbitBehaviour* orbit = dynamic_cast<CameraOrbitBehaviour*>(behaviour);
-    orbit->setObj(floor);
+    orbit->setObj(sphere);
     orbit->setDistance(10);
     orbit->rotate();
 

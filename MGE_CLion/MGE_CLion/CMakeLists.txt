@@ -20,7 +20,9 @@ add_executable(MGE_CLion ${SOURCE_FILES} ${SOURCES}
         mge/Structs/Lighting.hpp
         mge/materials/TerrainMaterial.cpp
         mge/materials/TerrainMaterial.hpp
-        mge/materials/TerrainMaterial.hpp)
+        mge/materials/TerrainMaterial.hpp
+        mge/behaviours/RotatingByKeybindsBehaviour.cpp
+        mge/behaviours/RotatingByKeyBindsBehaviour.hpp)
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 target_link_libraries(MGE_CLion PRIVATE sfml-system sfml-network sfml-graphics sfml-window)
 find_package(GLEW REQUIRED)

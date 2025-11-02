@@ -113,6 +113,8 @@ int main () {
 
     float scaleSpeed = 1;
 
+    float timeFloat = 0;
+
     // UPDATE
     while (window.isOpen()) {
         float customClock = (float)clock();
@@ -126,6 +128,8 @@ int main () {
             scaleSpeed -= 0.2f;
         }
 
+        timeFloat += scaleSpeed;
+
         sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(window);
         float windowX = window.getSize().x;
         float windowY = window.getSize().y;
@@ -136,13 +140,13 @@ int main () {
         //tell the GPU to use this program
         glUseProgram (programID);
         GLint columnsIndex = glGetUniformLocation(programID, "columns");
-        glUniform1i (columnsIndex, 8);
+        glUniform1i (columnsIndex, 10);
         GLint rowsIndex = glGetUniformLocation(programID, "rows");
-        glUniform1i (rowsIndex,  8);
+        glUniform1i (rowsIndex,  2);
         GLint clockIndex = glGetUniformLocation(programID, "clock");
         glUniform1f (clockIndex, customClock);
         GLint scaleSpeedIndex = glGetUniformLocation(programID, "scaleSpeed");
-        glUniform1f (scaleSpeedIndex, scaleSpeed);
+        glUniform1f (scaleSpeedIndex, timeFloat);
         GLint mousePositionIndex = glGetUniformLocation(programID, "mousePosition");
         glUniform2f (mousePositionIndex, (float)mousePos.x, (float)mousePos.y);
         GLint distanceIndex = glGetUniformLocation(programID, "distance");

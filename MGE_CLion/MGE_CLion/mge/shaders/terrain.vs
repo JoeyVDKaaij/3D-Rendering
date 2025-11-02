@@ -62,9 +62,12 @@ void main( void )
 
     mat3 normalMatrix = transpose(inverse(mat3(modelMatrix)));
     fNormal = normalize(normalMatrix * objectSpaceNormal);
+
     lightDirection = normalize(lightPosition - worldPos);
     lightDistance = length(worldPos - lightPosition);
+
     V = normalize(worldPos - cameraPosition);
+
     gl_Position = mvpMatrix * vec4(worldPos, 1.0);
 	texCoord = uv;
 }

@@ -13,7 +13,7 @@ out vec4 sColor;
 
 void main (void)
 {
-    float scale = sin(fClock / 1000 * fScaleSpeed);
+    float scale = sin(fScaleSpeed / 200);
 
     vec2 procUV = vec2((fColor.x - 0.5) * scale, (fColor.y - 0.5) * scale);
 

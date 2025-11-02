@@ -20,6 +20,7 @@
 #include "../behaviours/CameraOrbitBehaviour.hpp" //
 #include "../behaviours/MovementBehaviour.hpp" //
 #include "../behaviours/KeysBehaviour.hpp" //
+#include "../behaviours/RotatingByKeyBindsBehaviour.hpp" //
 #include "../util/DebugHud.hpp" //
 #include "../materials/LightMaterial.hpp"
 
@@ -75,6 +76,7 @@ void Assignment4Demo::_initializeScene()
     floor->scale(glm::vec3(3,3,3));
     floor->setMesh(terrainMesh);
     floor->setMaterial(terrainMaterial);
+    floor->setBehaviour(new RotatingByKeyBindsBehaviour());
     _world->add(floor);
 
     // Get the camera orbit behaviour

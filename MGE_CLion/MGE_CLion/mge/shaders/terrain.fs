@@ -52,20 +52,21 @@ void main( void ) {
 
 	vec3 ambient = ambientIntensity * ambientLightColor * diffuseColor.rgb;
 
-	vec3 diffuse = max(dot(normalize(lightDirection), normalize(fNormal)), 0) * lightColor * diffuseColor;
+    vec3 DirectionalLightDirection = vec3(0,0.5,-1);
+	vec3 diffuse = max(dot(normalize(DirectionalLightDirection), normalize(fNormal)), 0) * lightColor * diffuseColor;
 
     vec3 R = reflect(normalize(lightDirection), normalize(fNormal));
 	vec3 specular = pow(max(dot(V,R), 0), shininess) * specularColor * diffuseColor;
 
-    float attenuationDivider = constantAttenuation + linearAttenuation * lightDistance + quadraticAttenuation * pow(lightDistance, 2);
-    if (attenuationDivider > 0)
-    {
-        float attenuation = 1.0 / attenuationDivider;
-
-        diffuse *= attenuation;
-
-        specular *= attenuation;
-    }
+//     float attenuationDivider = constantAttenuation + linearAttenuation * lightDistance + quadraticAttenuation * pow(lightDistance, 2);
+//     if (attenuationDivider > 0)
+//     {
+//         float attenuation = 1.0 / attenuationDivider;
+//
+//         diffuse *= attenuation;
+//
+//         specular *= attenuation;
+//     }
 
 
 
