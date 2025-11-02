@@ -30,6 +30,7 @@ GLint TerrainMaterial::_uSpecularColor = 0;
 GLint TerrainMaterial::_uConstantAttenuation = 0;
 GLint TerrainMaterial::_uLinearAttenuation = 0;
 GLint TerrainMaterial::_uQuadraticAttenuation = 0;
+GLint TerrainMaterial::_uLightingInScene = 0;
 
 GLint TerrainMaterial::_aVertex = 0;
 GLint TerrainMaterial::_aNormal = 0;
@@ -73,6 +74,7 @@ void TerrainMaterial::_lazyInitializeShader() {
         _uConstantAttenuation = _shader->getUniformLocation("constantAttenuation");
         _uLinearAttenuation = _shader->getUniformLocation("linearAttenuation");
         _uQuadraticAttenuation = _shader->getUniformLocation("quadraticAttenuation");
+        _uLightingInScene = _shader->getUniformLocation("lightInScene");
 
         _aVertex = _shader->getAttribLocation("vertex");
         _aNormal = _shader->getAttribLocation("normal");
@@ -168,4 +170,5 @@ void TerrainMaterial::setLighting(Lighting pLighting, glm::vec3 lightPosition, g
     glUniform1f(_uConstantAttenuation, pLighting.constantAttenuation);
     glUniform1f(_uLinearAttenuation, pLighting.linearAttenuation);
     glUniform1f(_uQuadraticAttenuation, pLighting.quadraticAttenuation);
+    glUniform1i(_uLightingInScene, 1);
 }

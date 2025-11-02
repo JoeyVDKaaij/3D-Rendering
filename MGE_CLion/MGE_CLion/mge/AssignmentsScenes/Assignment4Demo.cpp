@@ -47,7 +47,7 @@ void Assignment4Demo::_initializeScene()
     // Create terrain mesh! Since storing 8196 * 8196 vertices is quite a lot,
     // we make the rest of the needed vertices in the vertex shader!
 //    Mesh* terrainMesh = Mesh::load(config::MGE_MODEL_PATH+"plane_8192.obj");
-    Mesh* terrainMesh = Mesh::loadTerrain(524, 524);
+    Mesh* terrainMesh = Mesh::loadTerrain(512, 512);
 
     //MATERIALS
 

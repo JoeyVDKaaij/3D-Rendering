@@ -44,6 +44,7 @@ class TextureMaterial : public AbstractMaterial
         static GLint _uConstantAttenuation;
         static GLint _uLinearAttenuation;
         static GLint _uQuadraticAttenuation;
+        static GLint _uLightingInScene;
 
         static GLint _aVertex ;
         static GLint _aNormal;

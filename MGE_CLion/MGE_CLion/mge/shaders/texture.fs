@@ -64,8 +64,8 @@ void main( void ) {
     // 	fragment_color = vec4(specular, 1) * diffuseTexture;
     // 	fragment_color = vec4(ambient + diffuse, 1) * diffuseTexture;
     // 	fragment_color = vec4(ambient + specular, 1) * diffuseTexture;
-        fragment_color = vec4(diffuse + specular, 1) * diffuseTexture;
-    // 	fragment_color = vec4(ambient + diffuse + specular, 1);
+//         fragment_color = vec4(diffuse + specular, 1) * diffuseTexture;
+    	fragment_color = vec4(ambient + diffuse + specular, 1) * diffuseTexture;
     }
     else
     {

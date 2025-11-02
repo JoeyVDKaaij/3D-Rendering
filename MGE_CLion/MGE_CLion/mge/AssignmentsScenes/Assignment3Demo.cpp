@@ -112,7 +112,7 @@ void Assignment3Demo::_initializeScene()
     light->setMesh(cubeMeshF);
     light->setMaterial(lightMaterial);
     light->setLighting(
-            0.1,
+            0.4,
             glm::vec3(1,1,1),
             glm::vec3(1,1,1),
             glm::vec3(1,1,1),

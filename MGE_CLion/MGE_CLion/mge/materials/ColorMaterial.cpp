@@ -46,7 +46,7 @@ void ColorMaterial::_lazyInitializeShader() {
         _uConstantAttenuation = _shader->getUniformLocation("constantAttenuation");
         _uLinearAttenuation = _shader->getUniformLocation("linearAttenuation");
         _uQuadraticAttenuation = _shader->getUniformLocation("quadraticAttenuation");
-        _uLightingInScene = _shader->getUniformLocation("lightingInScene");
+        _uLightingInScene = _shader->getUniformLocation("lightInScene");
     }
 }
 
@@ -98,5 +98,5 @@ void ColorMaterial::setLighting(Lighting pLighting, glm::vec3 lightPosition, glm
     glUniform1f(_uConstantAttenuation, pLighting.constantAttenuation);
     glUniform1f(_uLinearAttenuation, pLighting.linearAttenuation);
     glUniform1f(_uQuadraticAttenuation, pLighting.quadraticAttenuation);
-    glUniform1f(_uLightingInScene, true);
+    glUniform1i(_uLightingInScene, 1);
 }

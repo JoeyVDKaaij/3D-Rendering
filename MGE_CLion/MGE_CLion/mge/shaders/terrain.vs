@@ -46,7 +46,7 @@ void main( void )
 {
     vec4 heightTexture = texture(heightMap, uv);
     float heightValue = ((heightTexture.r + heightTexture.g + heightTexture.b) / 3);
-    float displacedY = vertex.y + heightValue *1;
+    float displacedY = vertex.y + heightValue;
     vec3 heightVertex = vec3(vertex.x, displacedY, vertex.z);
     vec3 worldPos = vec3(modelMatrix * vec4(heightVertex, 1));
 

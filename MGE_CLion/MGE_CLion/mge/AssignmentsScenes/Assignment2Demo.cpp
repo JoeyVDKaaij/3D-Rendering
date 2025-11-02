@@ -50,6 +50,7 @@ void Assignment2Demo::_initializeScene()
     Mesh* teapotF = Mesh::load (config::MGE_MODEL_PATH+"teapot_flat.obj");
     Mesh* suzannaS = Mesh::load (config::MGE_MODEL_PATH+"suzanna_smooth.obj");
     Mesh* marioMesh = Mesh::load (config::MGE_MODEL_PATH+"Mario.obj");
+    Mesh* stoneMesh = Mesh::load (config::MGE_MODEL_PATH+"stone.obj");
 
     //MATERIALS
 
@@ -61,6 +62,8 @@ void Assignment2Demo::_initializeScene()
     AbstractMaterial* blueMaterial = new ColorMaterial (glm::vec3(0,0,1));
     AbstractMaterial* greenMaterial = new ColorMaterial (glm::vec3(0,1,0));
     AbstractMaterial* landMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"land.jpg"));
+    AbstractMaterial* marioMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"mario_skin.png"));
+    AbstractMaterial* stoneMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"Stone.jpeg"));
 
     //SCENE SETUP
 
@@ -105,11 +108,17 @@ void Assignment2Demo::_initializeScene()
 //    suzanna->setBehaviour(new MovementBehaviour(1));
     floor->add(suzanna);
 
-    GameObject* mario = new GameObject ("Mario", glm::vec3(-0.75,0,0));
-    mario->scale(glm::vec3(0.15,0.15,0.15));
-    mario->setMesh(marioMesh);
-    mario->setMaterial(greenMaterial);
-    floor->add(mario);
+//    GameObject* mario = new GameObject ("Mario", glm::vec3(-0.75,0,0));
+//    mario->scale(glm::vec3(0.15,0.15,0.15));
+//    mario->setMesh(marioMesh);
+//    mario->setMaterial(marioMaterial);
+//    floor->add(mario);
+
+    GameObject* stone = new GameObject ("stone", glm::vec3(-0.75,0,0));
+    stone->scale(glm::vec3(0.005,0.005,0.005));
+    stone->setMesh(stoneMesh);
+    stone->setMaterial(stoneMaterial);
+    floor->add(stone);
 
     // Get the camera orbit behaviour
     AbstractBehaviour* behaviour = camera->getBehaviour();

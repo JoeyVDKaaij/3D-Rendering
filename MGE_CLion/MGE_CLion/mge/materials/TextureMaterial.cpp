@@ -25,6 +25,7 @@ GLint TextureMaterial::_uSpecularColor = 0;
 GLint TextureMaterial::_uConstantAttenuation = 0;
 GLint TextureMaterial::_uLinearAttenuation = 0;
 GLint TextureMaterial::_uQuadraticAttenuation = 0;
+GLint TextureMaterial::_uLightingInScene = 0;
 
 GLint TextureMaterial::_aVertex = 0;
 GLint TextureMaterial::_aNormal = 0;
@@ -58,6 +59,7 @@ void TextureMaterial::_lazyInitializeShader() {
         _uConstantAttenuation = _shader->getUniformLocation("constantAttenuation");
         _uLinearAttenuation = _shader->getUniformLocation("linearAttenuation");
         _uQuadraticAttenuation = _shader->getUniformLocation("quadraticAttenuation");
+        _uLightingInScene = _shader->getUniformLocation("lightInScene");
 
         _aVertex = _shader->getAttribLocation("vertex");
         _aNormal = _shader->getAttribLocation("normal");
@@ -111,4 +113,5 @@ void TextureMaterial::setLighting(Lighting pLighting, glm::vec3 lightPosition, g
     glUniform1f(_uConstantAttenuation, pLighting.constantAttenuation);
     glUniform1f(_uLinearAttenuation, pLighting.linearAttenuation);
     glUniform1f(_uQuadraticAttenuation, pLighting.quadraticAttenuation);
+    glUniform1i(_uLightingInScene, 1);
 }
