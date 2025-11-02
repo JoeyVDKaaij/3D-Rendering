@@ -1,0 +1,3 @@
+C:/Users/joey/CMGT/Term2/3D rendering/MGE_CLion/MGE_CLion/cmake-build-debug-visual-studio/CMakeFiles/MGE_CLion.dir
+C:/Users/joey/CMGT/Term2/3D rendering/MGE_CLion/MGE_CLion/cmake-build-debug-visual-studio/CMakeFiles/edit_cache.dir
+C:/Users/joey/CMGT/Term2/3D rendering/MGE_CLion/MGE_CLion/cmake-build-debug-visual-studio/CMakeFiles/rebuild_cache.dir

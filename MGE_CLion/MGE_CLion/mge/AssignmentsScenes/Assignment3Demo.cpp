@@ -1,0 +1,147 @@
+#include <iostream>
+#include <string>
+
+#include "../../glm.hpp"
+#include "Assignment3Demo.h"
+#include "../materials/AbstractMaterial.hpp"
+#include "../config.hpp"
+
+#include "../core/Renderer.hpp" //
+#include "../core/Mesh.hpp" //
+#include "../core/World.hpp" //
+#include "../core/Texture.hpp" //
+#include "../core/Light.hpp" //
+#include "../core/Camera.hpp"  //
+#include "../core/GameObject.hpp" //
+#include "../materials/ColorMaterial.hpp" //
+#include "../materials/LightMaterial.hpp" //
+#include "../materials/TextureMaterial.hpp" //
+#include "../behaviours/RotatingBehaviour.hpp" //
+#include "../behaviours/CameraOrbitBehaviour.hpp" //
+#include "../behaviours/MovementBehaviour.hpp" //
+#include "../behaviours/KeysBehaviour.hpp" //
+#include "../util/DebugHud.hpp" //
+
+
+Assignment3Demo::Assignment3Demo() : MGEDemo ()
+{
+}
+
+void Assignment3Demo::initialize() {
+    //setup the core part
+    AbstractGame::initialize();
+
+    //setup the custom part so we can display some text
+    std::cout << "Initializing HUD" << std::endl;
+    _hud = new DebugHud(_window);
+    std::cout << "HUD initialized." << std::endl << std::endl;
+}
+
+//build the game _world
+void Assignment3Demo::_initializeScene()
+{
+    //MESHES
+
+    //load a bunch of meshes we will be using throughout this demo
+    //each mesh only has to be loaded once, but can be used multiple times:
+    //F is flat shaded, S is smooth shaded (normals aligned or not), check the models folder!
+    Mesh* planeMeshDefault = Mesh::load (config::MGE_MODEL_PATH+"plane.obj");
+    Mesh* cubeMeshF = Mesh::load (config::MGE_MODEL_PATH+"cube_flat.obj");
+    Mesh* sphereMeshS = Mesh::load (config::MGE_MODEL_PATH+"sphere_smooth.obj");
+    Mesh* teapotF = Mesh::load (config::MGE_MODEL_PATH+"teapot_flat.obj");
+    Mesh* suzannaS = Mesh::load (config::MGE_MODEL_PATH+"suzanna_smooth.obj");
+//    Mesh* bonnieMesh = Mesh::load (config::MGE_MODEL_PATH+"Bonnie.obj");
+//    Mesh* guitarMesh = Mesh::load (config::MGE_MODEL_PATH+"Guitar.obj");
+
+    //MATERIALS
+
+    //create some materials to display the cube, the plane and the light
+    AbstractMaterial* lightMaterial = new LightMaterial(Texture::load (config::MGE_TEXTURE_PATH+"bricks.jpg"));
+    AbstractMaterial* runicStoneMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"runicfloor.png"));
+    AbstractMaterial* bricksMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"bricks.jpg"));
+    AbstractMaterial* redMaterial = new ColorMaterial (glm::vec3(1,0,0));
+    AbstractMaterial* blueMaterial = new ColorMaterial (glm::vec3(0,0,1));
+    AbstractMaterial* purpleMaterial = new ColorMaterial (glm::vec3(0.616,0,1));
+    AbstractMaterial* landMaterial = new TextureMaterial (Texture::load (config::MGE_TEXTURE_PATH+"land.jpg"));
+
+    //SCENE SETUP
+
+    //add camera first (it will be updated last)
+    Camera* camera = new Camera ("camera", glm::vec3(0,6,7));
+    camera->setBehaviour(new CameraOrbitBehaviour());
+    _world->add(camera);
+    _world->setMainCamera(camera);
+
+    //add the floor
+    GameObject* plane = new GameObject ("plane", glm::vec3(0,0,0));
+    plane->scale(glm::vec3(5,5,5));
+    plane->setMesh(planeMeshDefault);
+    plane->setMaterial(runicStoneMaterial);
+    _world->add(plane);
+
+    //add a spinning sphere
+    GameObject* sphere = new GameObject ("sphere", glm::vec3(0,0,0));
+    sphere->scale(glm::vec3(0.5,0.5,0.5));
+    sphere->setMesh (sphereMeshS);
+    sphere->setMaterial(bricksMaterial);
+    sphere->setBehaviour (new RotatingBehaviour());
+    plane->add(sphere);
+
+    //add a spinning sphere
+    GameObject* sphereColor = new GameObject ("sphereColor", glm::vec3(2,0,0));
+    sphereColor->scale(glm::vec3(0.5,0.5,0.5));
+    sphereColor->setMesh (sphereMeshS);
+    sphereColor->setMaterial(purpleMaterial);
+    sphereColor->setBehaviour (new MovementBehaviour(2));
+    plane->add(sphereColor);
+
+    // Get the camera orbit behaviour
+    AbstractBehaviour* behaviour = camera->getBehaviour();
+    CameraOrbitBehaviour* orbit = dynamic_cast<CameraOrbitBehaviour*>(behaviour);
+    orbit->setObj(sphere);
+    orbit->setDistance(10);
+    orbit->rotate();
+
+    //add a light. Note that the light does ABSOLUTELY ZIP! NADA ! NOTHING !
+    //It's here as a place holder to get you started.
+    //Note how the texture material is able to detect the number of lights in the scene
+    //even though it doesn't implement any lighting yet!
+
+    Light* light = new Light("light", glm::vec3(0,3,0));
+    light->scale(glm::vec3(0.1f, 0.1f, 0.1f));
+    light->setMesh(cubeMeshF);
+    light->setMaterial(lightMaterial);
+    light->setLighting(
+            0.1,
+            glm::vec3(1,1,1),
+            glm::vec3(1,1,1),
+            glm::vec3(1,1,1),
+            2,
+            glm::vec3(1,1,0),
+            1.0,
+            0.09,
+            0.032
+            );
+    _world->registerLight(light);
+    _world->add(light);
+
+    std::cout << "Amount of child objects = " << _world->getChildCount() << std::endl;
+}
+
+void Assignment3Demo::_render() {
+    AbstractGame::_render();
+    //_updateHud();
+}
+
+void Assignment3Demo::_updateHud() {
+    std::string debugInfo = "";
+    debugInfo += std::string ("FPS:") + std::to_string((int)_fps)+"\n";
+
+    //_hud->setDebugInfo(debugInfo);
+    //_hud->draw();
+}
+
+Assignment3Demo::~Assignment3Demo()
+{
+    //dtor
+}
